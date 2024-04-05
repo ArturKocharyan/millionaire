@@ -1,0 +1,77 @@
+.main_container {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.game_box {
+    display: flex;
+    width: 50%;
+    height: 400px;
+    border: 1px solid black;
+    justify-content: space-between;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    padding: 5px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.quastion {
+    display: flex;
+    width: 80%;
+    height: 100px;
+    border: 1px solid black;
+    border-radius: 15px;
+    text-align: center;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.answers_container {
+    display: grid;
+    grid-template-columns: auto auto;
+    width: 80%;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+.answer {
+    display: block;
+    width: 250px;
+    /* max-width: 150px; */
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.button_container{
+    display: flex;
+    width: 80%;
+    flex-direction: row-reverse;
+
+}
+
+.next_button{
+    height: 42px;
+    background: none;
+    border-radius: 15px;
+}
+
+.next_button:hover {
+    background-color: rgb(187, 201, 201);
+}
+
+.count_container {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    font-size: 25px;
+}
