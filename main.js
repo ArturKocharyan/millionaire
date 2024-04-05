@@ -65,9 +65,9 @@ function renderQuestion(questions) {
         answerDivs[index].textContent = answer;
         answerDivs[index].addEventListener('click', function handleClick(event) {
             if (currentQuestion.correct !== index) {
-                answerDivs[index].style.backgroundColor = 'red';
+                answerDivs[index].style.backgroundColor = '#FF3131';
             } else {
-                answerDivs[index].style.backgroundColor = 'green';
+                answerDivs[index].style.backgroundColor = '#32de84';
                 countOfAnswers++;
                 addCount(countOfAnswers);
                 answerDivs[index].removeEventListener('click', handleClick);
