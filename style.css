@@ -17,6 +17,7 @@
     align-content: center;
     padding: 5px;
     border-radius: 15px;
+
 }
 
 h1 {
@@ -34,6 +35,7 @@ h1 {
     align-content: center;
     flex-wrap: wrap;
     font-size: 25px;
+    background-color: #e0e1e6;
 }
 
 .answers_container {
@@ -53,6 +55,7 @@ h1 {
     border: 1px solid black;
     border-radius: 15px;
     text-align: center;
+    background-color: #e0e1e6;
 }
 
 .button_container {
@@ -81,6 +84,11 @@ h1 {
 
 
 @media (max-width: 600px) {
+    .game_box {
+        flex-wrap: initial;
+        height: 80%;
+        width: 90%;
+    }
 .quastion {
     height: 35%;
 }

@@ -1,6 +1,8 @@
 let currentQuestionIndex = 0;
 let questions;
 let countOfAnswers = 0;
+let chanceButton = document.getElementById("50")
+const resetButton = document.getElementById("reset")
 
 document.addEventListener('DOMContentLoaded', () => {
     fetch('https://raw.githubusercontent.com/ChristinaAjemyan/js_group_1/master/data/questions.js')
@@ -37,19 +39,10 @@ function addCount(count) {
 }
 
 
-// function test11(questions) {
-//     const currentQuestion = questions[currentQuestionIndex];
-
-//     const questionDiv = document.getElementById('question');
-//     questionDiv.textContent = currentQuestion.question;
-//     console.log(questions);
-// }
-
-
-
-
 function renderQuestion(questions) {
-    const currentQuestion = questions[currentQuestionIndex];
+    let currentQuestion = questions[currentQuestionIndex];
+
+
 
     const questionDiv = document.getElementById('quastion');
     questionDiv.textContent = currentQuestion.question;
@@ -61,23 +54,62 @@ function renderQuestion(questions) {
         answerDiv.style.backgroundColor = '';
     });
 
+    chanceButton.addEventListener('click', () => {
+        const correctIndex = currentQuestion.correct;
+        const selectedIndexes = [correctIndex];
+        let count = 1;
+        while (count < 2) {
+            const randomIndex = Math.floor(Math.random() * currentQuestion.content.length);
+            if (randomIndex !== correctIndex && !selectedIndexes.includes(randomIndex)) {
+                selectedIndexes.push(randomIndex);
+                count++;
+            }
+        }
+        answerDivs.forEach((answerDiv, index) => {
+            if (selectedIndexes.includes(index)) {
+                answerDiv.style.backgroundColor = '';
+            } else {
+                answerDiv.style.backgroundColor = '#FF3131';
+            }
+        });
+        chanceButton.disabled = true
+    });
+
     currentQuestion.content.forEach((answer, index) => {
         answerDivs[index].textContent = answer;
         answerDivs[index].addEventListener('click', function handleClick(event) {
             if (currentQuestion.correct !== index) {
                 answerDivs[index].style.backgroundColor = '#FF3131';
+                answerDivs[currentQuestion.correct].style.backgroundColor = '#32de84'
+                nextButton.disabled = false
+                chanceButton.disabled = true
             } else {
                 answerDivs[index].style.backgroundColor = '#32de84';
                 countOfAnswers++;
                 addCount(countOfAnswers);
                 answerDivs[index].removeEventListener('click', handleClick);
+                nextButton.disabled = false
+                chanceButton.disabled = true
             }
+            currentQuestion = ''
             event.stopPropagation();
         });
+
+        nextButton.disabled = true
+        chanceButton.disabled = false
+
     });
 }
 
+resetButton.addEventListener('click', () => {
+    currentQuestionIndex = 0
+    addCount(0)
+    renderQuestion(questions)
+})
+
 const nextButton = document.getElementById('next_button');
+nextButton.disabled = true
+chanceButton.disabled = false
 nextButton.addEventListener('click', () => {
     currentQuestionIndex++;
     if (currentQuestionIndex < questions.length) {
